@@ -1,4 +1,4 @@
+# Mark the detected language for specific file extensions
 *.html linguist-language=HTML
 *.java linguist-language=Java
 *.ts linguist-language=TypeScript
-*.html linguist-vendored=true
