@@ -15,4 +15,11 @@ Angular
 2. Select this Angular Folder. (import node_modules)
 3. Go to cmd prompt and enter npm start
 
+Used **MySQL** for Database
+
+**About**
+-------
+Allows people to book appointments with doctors, schedule lab tests, and buy medicines. It also includes online payment options and various other useful features.
+-------
+
 GitHub : [Shashank](https://github.com/ShashankCode1)
