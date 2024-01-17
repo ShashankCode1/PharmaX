@@ -1,0 +1,270 @@
+<br><br>
+<div style="position: relative;">
+    <img src="assets/Images/Homepage/Logo BG3.jpg" class="img-fluid" alt="LogoBG">
+    <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); text-align: center;">
+        <h1 style="font-family: 'Varela Round', sans-serif; font-weight: bold; color: black; font-size: 5vw;">
+            Pharma<span style="color: red;">X</span>
+        </h1>
+        <p style="max-width: 80%; margin: 0 auto;font-size: 1vw; color: black;">
+            India's most trusted Online Pharmacy, Buy your Medicines & Book Appointments @Best Prices!
+        </p>
+    </div>
+</div>
+
+<!-- End of Logo -->
+
+<!-- Menu Bar Options -->
+
+<div class="container">
+    <div class="row">
+        <!-- First column with an image -->
+        <div class="col-6 col-lg-3 mt-3 mb-3">
+            <img src="assets/Images/Homepage/BookAppointments BG2.jpg" alt="Image 1" class="img-fluid"
+                style="border-radius: 10px; box-shadow: 0 0 10px rgba(0, 0, 0, 0.16); cursor: pointer;"
+                (click)="appointmentPage()">
+        </div>
+
+        <!-- Second column with another image -->
+        <div class="col-6 col-lg-3 mt-3 mb-3">
+            <img src="assets/Images/Homepage/LabTests BG1.png" alt="Image 3" class="img-fluid"
+                style="border-radius: 10px; box-shadow: 0 0 10px rgba(0, 0, 0, 0.16); cursor: pointer;"
+                (click)="labTestPage()">
+        </div>
+
+        <div class="col-6 col-lg-3 mt-3 mb-3">
+            <img src="assets/Images/Homepage/BuyMedicine BG2.png" alt="Image 2" class="img-fluid"
+                style="border-radius: 10px; box-shadow: 0 0 10px rgba(0, 0, 0, 0.16); cursor: pointer;"
+                (click)="medicinePage()">
+        </div>
+
+        <div class="col-6 col-lg-3 mt-3 mb-3">
+            <img src="assets/Images/Homepage/HealthCare BG1.png" alt="Image 4" class="img-fluid"
+                style="border-radius: 10px; box-shadow: 0 0 10px rgba(0, 0, 0, 0.16); cursor: pointer;"
+                (click)="healthCarePage()">
+        </div>
+    </div>
+    <hr>
+</div>
+
+<!-- End of Menu Bar Options -->
+
+<br>
+
+<!-- Lab Tests Concern -->
+
+<div class="container">
+    <h2>LAB TESTS BY HEALTH CONCERN</h2>
+
+
+    <div class="d-flex align-items-center">
+
+        <button class="btn btn-primary" (click)="scrollLeft()"><i class="fa-solid fa-chevron-left"></i></button>
+
+        <div class="mx-1" style="overflow-x: scroll; scrollbar-width: none;" id="scrollContainer">
+            <!-- Hide scrollbar for Firefox -->
+            <div class="row flex-nowrap">
+
+                <div class="col-6 col-lg-3 mt-3 mb-3 mx-1">
+                    <img src="assets/Images/Homepage/FullBodyCheckUp BG1.jpg" alt="Image 1" class="img-fluid"
+                        style="border-radius: 10px; box-shadow: 0 0 10px rgba(0, 0, 0, 0.16); cursor: pointer;"
+                        (click)="labTestPage()">
+                </div>
+
+                <div class="col-6 col-lg-3 mt-3 mb-3">
+                    <img src="assets/Images/Homepage/Diabetes BG1.jpg" alt="Image 2" class="img-fluid"
+                        style="border-radius: 10px; box-shadow: 0 0 10px rgba(0, 0, 0, 0.16); cursor: pointer;"
+                        (click)="labTestPage()">
+                </div>
+
+                <div class="col-6 col-lg-3 mt-3 mb-3">
+                    <img src="assets/Images/Homepage/Thyroid BG1.png" alt="Image 3" class="img-fluid"
+                        style="border-radius: 10px; box-shadow: 0 0 10px rgba(0, 0, 0, 0.16); cursor: pointer;"
+                        (click)="labTestPage()">
+                </div>
+
+                <div class="col-6 col-lg-3 mt-3 mb-3">
+                    <img src="assets/Images/Homepage/Dengue BG1.jpg" alt="Image 4" class="img-fluid"
+                        style="border-radius: 10px; box-shadow: 0 0 10px rgba(0, 0, 0, 0.16); cursor: pointer;"
+                        (click)="labTestPage()">
+                </div>
+
+                <div class="col-6 col-lg-3 mt-3 mb-3">
+                    <img src="assets/Images/Homepage/Kidney BG1.jpg" alt="Image 5" class="img-fluid"
+                        style="border-radius: 10px; box-shadow: 0 0 10px rgba(0, 0, 0, 0.16); cursor: pointer;"
+                        (click)="labTestPage()">
+                </div>
+
+                <div class="col-6 col-lg-3 mt-3 mb-3">
+                    <img src="assets/Images/Homepage/Womens Health BG1.png" alt="Image 6" class="img-fluid"
+                        style="border-radius: 10px; box-shadow: 0 0 10px rgba(0, 0, 0, 0.16); cursor: pointer;"
+                        (click)="labTestPage()">
+                </div>
+
+                <div class="col-6 col-lg-3 mt-3 mb-3">
+                    <img src="assets/Images/Homepage/Blood Studies BG1.png" alt="Image 7" class="img-fluid"
+                        style="border-radius: 10px; box-shadow: 0 0 10px rgba(0, 0, 0, 0.16); cursor: pointer;"
+                        (click)="labTestPage()">
+                </div>
+
+                <div class="col-6 col-lg-3 mt-3 mb-3">
+                    <img src="assets/Images/Homepage/Liver BG1.jpg" alt="Image 8" class="img-fluid"
+                        style="border-radius: 10px; box-shadow: 0 0 10px rgba(0, 0, 0, 0.16); cursor: pointer;"
+                        (click)="labTestPage()">
+                </div>
+
+            </div>
+        </div>
+
+        <button class="btn btn-primary" (click)="scrollRight()"><i class="fa-solid fa-chevron-right"></i></button>
+
+    </div>
+
+    <hr>
+
+</div>
+
+<!-- End Lab Tests Concern -->
+
+<br>
+
+<!-- HealthTab -->
+
+<div class="container mt-2"> <!-- Add some margin-top for spacing -->
+    <div class="row">
+
+        <!-- First Column: Image -->
+        <div class="col-3">
+            <img src="assets/Images/Homepage/HealthTab.jpg" alt="Image" class="img-fluid mb-3"
+                style="max-height: 150px; border-radius: 10px; box-shadow: 0 0 10px rgba(0, 0, 0, 0.16);">
+        </div>
+
+        <!-- Second Column: Text -->
+        <div class="col-3">
+            <img src="assets/Images/Homepage/HealthTab2.jpg" alt="Image" class="img-fluid mb-3"
+                style="max-height: 150px; border-radius: 10px; box-shadow: 0 0 10px rgba(0, 0, 0, 0.16);">
+        </div>
+
+        <!-- Third Column: Text -->
+        <div class="col-3">
+            <h4 class="d-none d-md-block">Prioritizing Your Health: A Guide to Healthcare</h4>
+            <h6 class="d-md-none" style="font-size: x-small;">Prioritizing Your Health: A Guide to Healthcare</h6>
+            <p class="d-none d-md-block">Explore our comprehensive guide to prioritize your health with valuable
+                healthcare insights</p>
+            <p class="d-md-none" style="font-size: xx-small;">Explore our comprehensive guide to prioritize your health
+                with valuable healthcare insights</p>
+        </div>
+
+        <!-- Fourth Column: Text -->
+        <div class="col-3 d-flex justify-content-center align-items-center">
+            <button class="btn btn-outline-danger" (click)="healthCarePage()">Get Started</button>
+        </div>
+    </div>
+</div>
+<hr>
+
+<!-- End HealthTab -->
+
+<br>
+
+<!-- Descriptions -->
+
+<div class="container">
+    <h2 align="center"><b><u>Pharma<span style="color: red;">X</span> - ONLINE PHARMACY INDIA</u></b></h2><br>
+    <p align="center">The Online pharmacy business in India is rapidly evolving with the advent of eCommerce.
+        mChemist, an online pharmacy in India, helps meet the healthcare objectives of millions by providing Genuine
+        medicines and health products with minimum hassles and maximum benefits.
+        PharmaX offers an Android App to enhance user convenience
+        So, sign up and send original prescription, buy medicines Online.
+        Benefit from the Medical eCommerce era!</p>
+    <br>
+    <br>
+    <h2 style="color: brown;">EFFORTLESS ONLINE MEDICINE ORDERS AT PHARMAX :</h2>
+    <p>Because ordering medicines online need not be complicated but rather a cakewalk. And at PharmaX we
+        ensure that. All you need to do is:</p>
+    <ul>
+        <li>Browse through our wide variety of products</li>
+        <li>Add products to your cart and complete the payment. Voila!</li>
+        <li>Your order will be on its way to you.</li>
+        <li>PharmaX Pharmacy is your go-to online pharmacy store for all your medicine needs. We also have a range of
+            products in the personal care, baby care, health and nutrition, wellness, and lifestyle categories.</li>
+        <li>Come explore ‘everything under the sun’ related to healthcare at PharmaX.
+        </li>
+    </ul>
+
+    <br>
+    <br>
+
+    <h2 style="color: brown;">REASONS TO BUY MEDICINE FROM PHARMAX :</h2>
+    <p>PharmaX has been providing you with genuine medicines round-the-clock, through 24-hour pharmacies. And now
+        through PharmaX Pharmacy, we intend to make your lives easier – by getting your medicines delivered to you. Yes,
+        no more stepping out to get your medicines, no more standing in long queues, no more worrying about the
+        genuineness of medicines, no more sweat! Here are more reasons why you should buy your medicines from PharmaX :
+    </p>
+    <ul>
+        <li>Super-fast deliveries. In select cities, deliveries are done in as less as 1 day</li>
+        <li>Largest pharmacy chain in India with over 5,600 stores</li>
+        <li>Attractive deals on medicines and other FMCG products</li>
+        <li>Option to consult with a pharmacologist to check medicine interactions</li>
+        <li>Wide range of healthcare products to choose from</li>
+        <li>Only genuine and top-quality products delivered.</li>
+    </ul>
+
+    <br>
+    <br>
+
+    <h2 style="color: brown;">ABOUT US:</h2>
+    <p>PharmaX.com is the online gateway to your favourite medical and general store, pharmaX. With over 2980 pharmacy
+        stores and omni-channel service, pharmaX is trusted by over 3 lakh customers daily across 7 states in India At
+        PharmaX.com you can order the products you regularly buy from our stores from the convenience of home and pick
+        them up from a med store near you. To start shopping, simply search for the products you wish to buy, choose the
+        quantity and place the order. We will inform you when the medicines are ready for pick up. All orders are filled
+        within 6 hrs during the regular business hours and on the next day for evening or weekend orders. At
+        PharmaX.com, you can also view or take prints of all your previous PharmaX bills, and conveniently reorder the
+        products you bought earlier. Regardless of how you shop at PharmaX, be assured that we will continue to offer
+        you high quality and genuine products, stored and handled in optimal conditions at attractive discounts. pharmaX
+        has always been and continue to be your one-stop shop for all your medicines and general product needs, now with
+        the added convenience of shopping from home at the click of a button.</p>
+
+    <br>
+    <br>
+
+    <h2 style="color: brown;">QUESTIONS</h2>
+    <b>How to order medicines online from PharmaX?</b>
+    <p>Ordering medicines from PhramaX Pharmacy online medical store is quick and hassle-free. If you wish to purchase
+        over-the-counter medicines or FMCG products, all you need to do is click on the ‘Buy Medicines’ section on the
+        app/website and type the name of the product you wish to buy in the search box. Once you select the product, you
+        can click on the ‘Add to Cart’ button and proceed to make the payment. Once your order has been confirmed, we
+        will start prepping your order for home delivery.</p>
+
+    <br>
+
+    <b>Is online medicine delivery safe?</b>
+    <p>Absolutely! All the medicines/products sold through our platform are inspected thoroughly for their authenticity
+        and quality. Also, while delivering the medicines, our team follows strict safety protocols to ensure only the
+        top-notch products get delivered to you.</p>
+
+    <br>
+
+    <b>How do I know if there is a delay in delivery?</b>
+    <p>If, for any reason, your order is delayed, our team will contact you either through SMS, call or email and inform
+        you of the same. You can also check the status of your order on the app/website by clicking on the ‘Order
+        Status’ button.</p>
+
+    <br>
+
+    <b>Does PharmaX provide home delivery of medicines?</b>
+    <p>Yes, PharmaX provides the fastest home delivery of medicines</p>
+
+    <br>
+
+    <h4><b>We Believe in ‘Simplifying Healthcare, Impacting Lives!’</b></h4>
+
+    <br>
+    <br>
+    <p align="right">© Pharma<span style="color: red;">X</span> Pvt.Limited</p>
+</div>
+
+<!-- End Descriptions -->
+
+
+

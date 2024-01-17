@@ -1,0 +1,30 @@
+<br><br><br>
+<h1 align="center"><b><u>Medicines</u></b></h1><br>
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-3" *ngFor="let med of medicines">
+            <div class="card" style="width:250px">
+                <img class="card-img-top" src={{med.imgsrc}} alt="Card image" style="width:100%; height: 100%;">
+                <div class="card-body" style="margin-bottom: -15px;">
+                    <h4 class="card-title">{{med.medName}}</h4>
+                    <p class="card-text"><b>SYMPTOMS : </b> {{med.symptoms}}</p>
+                    <p style="margin-top: -15px;"><b>Cost : </b> ₹{{med.price}}/-</p>
+
+                    <p align="right">
+                        <button *ngIf="!med.inCart" (click)="addToCart(med)" class="btn btn-primary">Add</button>
+                        <span *ngIf="med.inCart">
+                            <button (click)="decrementQuantity(med)" class="btn btn-outline-danger"><i
+                                    class="fa-solid fa-minus"></i></button>&nbsp;
+                            <span class="btn btn-primary"
+                                style="padding-left: 15px; padding-right: 15px;">{{med.quantity}}</span>
+                            &nbsp;<button (click)="incrementQuantity(med)" class="btn btn-outline-success"><i
+                                    class="fa-solid fa-plus"></i></button>
+                        </span>
+                    </p>
+                </div>
+            </div>
+            <br>
+        </div>
+    </div>
+</div>

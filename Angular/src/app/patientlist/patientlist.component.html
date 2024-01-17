@@ -1,0 +1,37 @@
+<div id="background-image">
+    <br>
+    <br>
+    <br>
+    <h1 align="center" style="text-decoration: underline;"><b>Patient List</b></h1> <br>
+
+    <div class="container">
+        <table class="table table-striped table-bordered table-hover">
+            <thead>
+                <tr align="center" class="table-primary">
+                    <th class="text-dark">ID</th>
+                    <th class="text-dark">Patient Name</th>
+                    <th class="text-dark">Age</th>
+                    <th class="text-dark">Gender</th>
+                    <th class="text-dark">PhoneNo</th>
+                    <th class="text-dark">EmailId</th>
+                    <th class="text-dark">App. Date</th>
+                    <th class="text-dark">Doctor ID</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                <tr *ngFor="let app of appointments" align="center">
+                    <td>{{ app.pId }}</td>
+                    <td>{{ app.pName | uppercase }}</td>
+                    <td>{{ app.pAge }}</td>
+                    <td>{{ app.gender }}</td>
+                    <td>{{ app.pPhoneNo }}</td>
+                    <td>{{ app.pEmailId }}</td>
+                    <td>{{ app.appDate | date: "dd-MMM-yyyy"}}</td>
+                    <td>{{ app.docId }}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+</div>

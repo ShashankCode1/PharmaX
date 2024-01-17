@@ -1,0 +1,95 @@
+<div id="background-image">
+    <div class="container d-flex justify-content-center align-items-center vh-100">
+        <form #regDocForm="ngForm" (ngSubmit)="validateReg(regDocForm.value)" novalidate>
+            <div class="row mx-auto box"
+                style="max-width: 75%; border: 1px solid rgb(215, 210, 210); border-radius: 10px; backdrop-filter: blur(2px); background-color: rgba(255, 255, 255, 0.3);">
+                <div class="col-md-6 d-none d-md-block">
+                    <br>
+                    <img src="assets/Images/AddDoctor2.png" class="img-fluid" alt="AddDoctorBG"
+                        style="padding-left: 15px;">
+                </div>
+                <div class="col-md-6 d-flex align-items-center" style="padding-left: 50px; padding-right: 50px;">
+
+                    <div class="d-flex flex-column justify-content-center" style="width: 350px;">
+
+                        <h1 style="font-weight: bold; padding-top: 20px; display: flex; justify-content: center;">
+                            Add Doctor !</h1>
+
+                        <div style="width: 100%;">
+
+                            <div class="input-group">
+                                <span class="input-group-text"><i class="fa-regular fa-id-card"></i></span>
+                                <input class="form-control" type="number" placeholder="Enter Doctor ID" name="docId"
+                                    ngModel #docId="ngModel" required>
+                            </div>
+                            <div *ngIf="docId.errors?.['required'] && docId.touched"
+                                [class.shake-on-error]="docId.errors?.['required'] && docId.touched" align="right">
+                                <p style="color: red; font-size: 12px;"><i
+                                        class="fa-solid fa-circle-exclamation"></i>&nbsp;Required
+                                </p>
+                            </div>
+
+                            <div class="input-group">
+                                <span class="input-group-text"><i class="fa-solid fa-user-doctor"></i></span>
+                                <input class="form-control" type="text" placeholder="Enter Doctor Name" name="docName"
+                                    ngModel required #docName="ngModel" pattern="[a-zA-Z\s]+">
+                            </div>
+                            <div *ngIf="(docName.errors?.['required'] || docName.errors?.['pattern']) && docName.touched"
+                                [class.shake-on-error]="(docName.errors?.['required'] || docName.errors?.['pattern']) && docName.touched"
+                                align="right">
+                                <p style="color: red; font-size: 12px;"><i
+                                        class="fa-solid fa-circle-exclamation"></i>&nbsp;Enter Valid Name
+                                </p>
+                            </div>
+
+                            <div class="input-group">
+                                <span class="input-group-text"><i class="fa-solid fa-star-of-life"></i></span>
+                                <input class="form-control" type="number" placeholder="Enter Experience"
+                                    name="experience" ngModel required #experience="ngModel">
+                            </div>
+                            <div *ngIf="experience.errors?.['required'] && experience.touched"
+                                [class.shake-on-error]="experience.errors?.['required'] && experience.touched"
+                                align="right">
+                                <p style="color: red; font-size: 12px;"><i
+                                        class="fa-solid fa-circle-exclamation"></i>&nbsp;Required
+                                </p>
+                            </div>
+
+                            <div class="input-group">
+                                <span class="input-group-text"><i class="fa-solid fa-stethoscope"></i></span>
+                                <input class="form-control" type="text" placeholder="Enter Specialisation"
+                                    name="specialisation" ngModel required #specialisation="ngModel">
+                            </div>
+                            <div *ngIf="specialisation.errors?.['required'] && specialisation.touched"
+                                [class.shake-on-error]="specialisation.errors?.['required'] && specialisation.touched"
+                                align="right">
+                                <p style="color: red; font-size: 12px;"><i
+                                        class="fa-solid fa-circle-exclamation"></i>&nbsp;Required
+                                </p>
+                            </div>
+
+                            <div class="input-group">
+                                <span class="input-group-text"><i class="fa-solid fa-graduation-cap"></i></span>
+                                <input class="form-control" type="text" placeholder="Enter qualification"
+                                    name="qualification" ngModel required #qualification="ngModel">
+                            </div>
+                            <div *ngIf="qualification.errors?.['required'] && qualification.touched"
+                                [class.shake-on-error]="qualification.errors?.['required'] && qualification.touched"
+                                align="right">
+                                <p style="color: red; font-size: 12px;"><i
+                                        class="fa-solid fa-circle-exclamation"></i>&nbsp;Required
+                                </p>
+                            </div>
+
+                            <button [disabled]="!regDocForm.valid" class="btn btn-info mx-auto d-block"
+                                style="margin-top: 15px; margin-bottom: 15px;">Add</button>
+
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

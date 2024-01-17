@@ -1,0 +1,191 @@
+<div id="background-image">
+    <div class="container d-flex justify-content-center align-items-center vh-100">
+        <form #regForm="ngForm" (ngSubmit)="validateReg(regForm.value)" novalidate>
+            <div class="row mx-auto box"
+                style="max-width: 80%; border: 1px solid rgb(215, 210, 210); border-radius: 10px; backdrop-filter: blur(2px); background-color: rgba(255, 255, 255, 0.3);">
+                <div class="col-md-6 d-none d-md-block">
+                    <br>
+                    <img src="assets/Images/SignUpBG7.png" class="img-fluid" alt="LoginFormBG"
+                        style="padding-left: 15px;">
+                </div>
+                <div class="col-md-6 d-flex align-items-center">
+
+                    <div class="d-flex flex-column justify-content-center"
+                        style="width: 430px; padding-left: 10px; padding-right: 10px;">
+
+                        <h4
+                            style="font-family: 'Varela Round', sans-serif; font-weight: bold; font-size: larger; padding-top: 20px;">
+                            Get
+                            Started with <span style="font-size: 30px;">Pharma</span><span
+                                style="color: red; font-size: 30px;">X</span></h4>
+
+                        <div style="width: 100%;">
+
+                            <div class="input-group">
+                                <span class="input-group-text"><i class="fa-solid fa-hospital-user"></i></span>
+                                <input class="form-control" style="width: 120px;" type="text" placeholder="Your Name"
+                                    required name="name" ngModel #name="ngModel" pattern="[a-zA-Z\s]+">
+
+                            </div>
+                            <div *ngIf="(name.errors?.['required'] || name.errors?.['pattern']) && name.touched"
+                                [class.shake-on-error]="(name.errors?.['required'] || name.errors?.['pattern']) && name.touched"
+                                align="right">
+                                <p class="errors" style="color: red; font-size: 12px;"><i
+                                        class="fa-solid fa-circle-exclamation"></i>&nbsp;Enter Valid Name
+                                </p>
+                            </div>
+
+                            <div class="input-group">
+                                <span class="input-group-text"><i class="fa-solid fa-id-card"></i></span>
+                                <input class="form-control rounded-end" style="margin-right: 10px;" type="number"
+                                    placeholder="Age" required name="age" ngModel #age="ngModel">
+                                <span class="input-group-text rounded-start"><i class="fa-solid fa-phone"></i></span>
+                                <input class="form-control" type="number" placeholder="PhoneNo" required name="phone"
+                                    ngModel #phoneNo="ngModel" pattern="[6-9][0-9]{9}">
+                                <input type="hidden" [(ngModel)]="fullphoneNo" name="phoneNo">
+                            </div>
+                            <div *ngIf="age.errors?.['required'] && age.touched"
+                                [class.shake-on-error]="age.errors?.['required'] && age.touched" align="right">
+                                <p style="color: red; font-size: 12px;"><i
+                                        class="fa-solid fa-circle-exclamation"></i>&nbsp;Age Required
+                                </p>
+                            </div>
+                            <div *ngIf="(phoneNo.errors?.['required'] || phoneNo.errors?.['pattern']) && phoneNo.touched"
+                                [class.shake-on-error]="(phoneNo.errors?.['required'] || phoneNo.errors?.['pattern']) && phoneNo.touched"
+                                align="right">
+                                <p style="color: red; font-size: 12px;"><i
+                                        class="fa-solid fa-circle-exclamation"></i>&nbsp;Indian Numbers Only
+                                </p>
+                            </div>
+
+
+                            <div class="input-group">
+                                <span class="input-group-text"><i class="fa-solid fa-at"></i></span>
+                                <input class="form-control rounded-end" type="text" placeholder="Enter Email ID"
+                                    required name="emailId" ngModel #emailId="ngModel"
+                                    pattern="[a-zA-Z0-9.]+@[a-zA-Z]+\.[a-zA-Z]{2,}$">
+                            </div>
+                            <div *ngIf="(emailId.errors?.['required'] || emailId.errors?.['pattern']) && emailId.touched"
+                                [class.shake-on-error]="emailId.errors?.['required'] && emailId.touched" align="right">
+                                <p class="errors" style="color: red; font-size: 12px;"><i
+                                        class="fa-solid fa-circle-exclamation"></i>&nbsp;Enter Valid Email
+                                </p>
+                            </div>
+
+                            <div class="input-group">
+                                <span class="input-group-text"><i class="fa-solid fa-key"></i></span>
+                                <input class="form-control" type="password" placeholder="Enter Password" required
+                                    name="password" ngModel #password="ngModel"
+                                    pattern="^(?=.*[A-Z])(?=.*\d)(?=.*[~!@#$%^&*]).{3,8}$">
+                            </div>
+                            <div *ngIf="((password.errors?.['required'] || password.errors?.['pattern']) && password.touched)"
+                                align="right"
+                                [class.shake-on-error]="((password.errors?.['required'] || password.errors?.['pattern']) && password.touched)">
+                                <p class="errors"
+                                    style="color: red; font-size: 12px; display: inline-block; text-align: left;"><i
+                                        class="fa-solid fa-circle-exclamation"></i>&nbsp;Password
+                                    must
+                                    contain less than 8 characters<br>
+                                    • one upper case letter <br>
+                                    • one digit <br>
+                                    • one symbol (~!@#$%^&*)
+                                </p>
+                            </div>
+
+                            <div class="input-group">
+                                <span class="input-group-text"><i class="fa-solid fa-key"></i></span>
+                                <input class="form-control" type="password" placeholder="Re-enter Password" required
+                                    name="rpassword" ngModel #rpassword="ngModel">
+                            </div>
+                            <div *ngIf="(rpassword.errors?.['required'] || !rPassword(password.value, rpassword.value)) && rpassword.touched"
+                                [class.shake-on-error]="rpassword.errors?.['required'] && rpassword.touched"
+                                align="right">
+                                <p class="errors" style="color: red; font-size: 12px;"><i
+                                        class="fa-solid fa-circle-exclamation"></i>&nbsp;Passwords not matched
+                                </p>
+                            </div>
+
+                            <p style="margin-top: 10px; font-size: small;" align="center">By continuing you agree to our
+                                <span style="color: red; cursor: pointer;" data-bs-toggle="modal"
+                                    data-bs-target="#tosModal">Terms of
+                                    Service!</span>
+                            </p>
+
+                            <div class="d-flex justify-content-center recaptcha-container">
+                                <re-captcha (resolved)="captchaVerified = $event ? true : false" [siteKey]="siteKey"
+                                    id="captcha-size"></re-captcha>
+                            </div>
+
+                            <button [disabled]="!regForm.valid || !captchaVerified"
+                                class="btn btn-info mx-auto d-block">
+                                <span *ngIf="!isSending">Get Cure</span>
+                                <span *ngIf="isSending">
+                                    <i class="fa fa-spinner fa-spin"></i> Registering...
+                                </span>
+                            </button>
+
+                            <div align="center" style="margin-top: 10px; padding-bottom: 20px;">
+                                <p style="font-family:'Varela Round', sans-serif;">Pharma<span
+                                        style="color: red;">X</span>
+                                    Member? <span
+                                        style="font-family: 'Varela Round', sans-serif; color: red; font-weight: bold; cursor: pointer;"
+                                        (click)="signIn()">Sign In
+                                    </span></p>
+                            </div>
+
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+
+
+<!-- TOS Modal -->
+<div class="modal fade" id="tosModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+    aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="staticBackdropLabel">Terms of Service</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+
+            <div class="modal-body">
+
+                • <b>Eligibility:</b> Users of the PharmaX Platform must be at least 18 years old or supervised by a
+                parent/guardian. They must be legally competent to contract and not previously suspended or disqualified
+                by PharmaX.
+                <br>
+
+                • <b>Legal Framework:</b> The terms and conditions are governed by Indian laws, including the Indian
+                Contract Act, Information Technology Act, Drugs and Cosmetics Act, and other relevant statutes.
+                <br>
+
+                • <b>Services:</b> PharmaX provides services including the display, advertisement, sale, and delivery of
+                medicines, pharmaceutical products, and other goods. All transactions are with PharmaX, and users must
+                agree to these terms.
+                <br>
+
+                • <b>Use of PharmaX Platform:</b> By using the platform, users agree to the terms and conditions. They
+                are responsible for the accuracy of the information they provide, safeguarding their account, and
+                complying with all applicable laws.
+                <br>
+
+                • <b>Privacy:</b> User information may be used for various purposes, as detailed in the Privacy Policy.
+                PharmaX may refuse service or terminate accounts if users violate the law or the terms and conditions.
+                <br>
+                • <b>Transaction:</b> Once a transaction is successful, refunds cannot be processed.
+
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Understood</button>
+            </div>
+        </div>
+    </div>
+</div>

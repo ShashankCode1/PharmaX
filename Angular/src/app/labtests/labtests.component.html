@@ -1,0 +1,205 @@
+<div class="container d-flex justify-content-center align-items-center vh-100">
+    <form #labForm="ngForm" (ngSubmit)="validateLab(labForm.value)" novalidate>
+        <div class="row mx-auto box" style="max-width: 80%; border: 1px solid rgb(215, 210, 210); border-radius: 10px;">
+            <div class="col-md-6 d-none d-md-block">
+                <br>
+                <img src="assets/Images/LabTest1.jpg" class="img-fluid" alt="LoginFormBG"
+                    style="margin-left: -12px; border-radius: 10px; margin-top: -25px;">
+            </div>
+            <div class="col-md-6 d-flex align-items-center">
+
+                <div class="d-flex flex-column justify-content-center"
+                    style="width: 430px; height: 430px; padding-left: 10px; padding-right: 10px;">
+
+                    <!-- For SelfBooking -->
+                    <div *ngIf="selfBooking">
+                        <h2 align="center">Schedule Lab Test</h2>
+
+                        <div style="width: 100%;">
+
+                            <div class="input-group">
+                                <span class="input-group-text"><i class="fa-solid fa-hospital-user"></i></span>
+                                <input class="form-control" style="width: 120px;" type="text" placeholder="Patient Name"
+                                    required name="patName" ngModel [(ngModel)]="name" readonly>
+                            </div>
+
+
+                            <div class="input-group">
+                                <span class="input-group-text"><i class="fa-solid fa-id-card"></i></span>
+                                <input class="form-control rounded-end" style="margin-right: 10px;" type="number"
+                                    placeholder="Age" required name="patAge" ngModel [(ngModel)]="age" readonly>
+                                <span class="input-group-text rounded-start"><i class="fa-solid fa-phone"></i></span>
+                                <input class="form-control" type="text" placeholder="PhoneNo" required name="patPhoneNo"
+                                    ngModel [(ngModel)]="phoneNo" readonly>
+                            </div>
+
+
+                            <div class="input-group">
+                                <span class="input-group-text"><i class="fa-solid fa-at"></i></span>
+                                <input class="form-control" type="text" placeholder="Enter Email" name="patEmail"
+                                    ngModel required [(ngModel)]="emailId" readonly>
+                            </div>
+
+                            <div class="input-group">
+                                <span class="input-group-text"><i class="fa-solid fa-vials"></i></span>
+                                <select class="form-select" name="labTest" ngModel required #labTest="ngModel">
+                                    <option value="" disabled selected>Choose Lab Test</option>
+                                    <option value="Full Body Checkup">Full Body Checkup</option>
+                                    <option value="Diabetes">Diabetes</option>
+                                    <option value="Thyroid">Thyroid</option>
+                                    <option value="Dengue">Dengue</option>
+                                    <option value="Kidney">Kidney</option>
+                                    <option value="Liver">Liver</option>
+                                    <option value="Women's Health">Women's Health</option>
+                                    <option value="Blood Studies">Blood Studies</option>
+                                </select>
+                            </div>
+                            <div *ngIf="labTest.errors?.['required'] && labTest.touched"
+                                [class.shake-on-error]="labTest.errors?.['required'] && labTest.touched" align="right">
+                                <p style="color: red; font-size: 12px;"><i
+                                        class="fa-solid fa-circle-exclamation"></i>&nbsp;Required
+                                </p>
+                            </div>
+
+                            <div class="input-group">
+                                <span class="input-group-text"><i class="fa-solid fa-calendar-days"></i></span>
+                                <input class="form-control" type="date" name="labDate" ngModel required
+                                    #labDate="ngModel">
+                            </div>
+                            <div *ngIf="labDate.errors?.['required'] && labDate.touched"
+                                [class.shake-on-error]="labDate.errors?.['required'] && labDate.touched" align="right">
+                                <p style="color: red; font-size: 12px;"><i
+                                        class="fa-solid fa-circle-exclamation"></i>&nbsp;Required
+                                </p>
+                            </div>
+
+                            <p style="margin-top: 10px; font-size: small; color: red;" align="center">LabTests start
+                                from 11
+                                AM to 3 PM
+                            </p>
+
+                            <button [disabled]="!labForm.valid" class="btn btn-danger mx-auto d-block">
+                                <span *ngIf="!isSending">Schedule</span>
+                                <span *ngIf="isSending">
+                                    <i class="fa fa-spinner fa-spin"></i> Scheduling...
+                                </span>
+                            </button>
+
+                            <button class="btn btn-outline-primary"
+                                style="float: right; font-size: 10px; padding: 0.25rem;" (click)="toggleBooking()">Book
+                                for Others</button>
+                        </div>
+                    </div>
+                    <!-- End -->
+
+                    <!-- Book For Others -->
+                    <div *ngIf="!selfBooking">
+                        <h2 align="center">Schedule Lab Test</h2>
+
+                        <div style="width: 100%;">
+
+                            <div class="input-group">
+                                <span class="input-group-text"><i class="fa-solid fa-hospital-user"></i></span>
+                                <input class="form-control" style="width: 120px;" type="text" placeholder="Patient Name"
+                                    required name="patName" ngModel #patName="ngModel" pattern="[a-zA-Z\s]+">
+                            </div>
+                            <div *ngIf="(patName.errors?.['required'] || patName.errors?.['pattern']) && patName.touched"
+                                [class.shake-on-error]="(patName.errors?.['required'] || patName.errors?.['pattern']) && patName.touched"
+                                align="right">
+                                <p class="errors" style="color: red; font-size: 12px;"><i
+                                        class="fa-solid fa-circle-exclamation"></i>&nbsp;Enter Valid Name
+                                </p>
+                            </div>
+
+                            <div class="input-group">
+                                <span class="input-group-text"><i class="fa-solid fa-id-card"></i></span>
+                                <input class="form-control rounded-end" style="margin-right: 10px;" type="number"
+                                    placeholder="Age" required name="patAge" ngModel #patAge="ngModel">
+                                <span class="input-group-text rounded-start"><i class="fa-solid fa-phone"></i></span>
+                                <input class="form-control" type="text" placeholder="PhoneNo" required name="patPhoneNo"
+                                    ngModel #patPhoneNo="ngModel" pattern="[6-9][0-9]{9}">
+                            </div>
+                            <div *ngIf="patAge.errors?.['required'] && patAge.touched"
+                                [class.shake-on-error]="patAge.errors?.['required'] && patAge.touched" align="right">
+                                <p style="color: red; font-size: 12px;"><i
+                                        class="fa-solid fa-circle-exclamation"></i>&nbsp;Age Required
+                                </p>
+                            </div>
+                            <div *ngIf="(patPhoneNo.errors?.['required'] || patPhoneNo.errors?.['pattern']) && patPhoneNo.touched"
+                                [class.shake-on-error]="(patPhoneNo.errors?.['required'] || patPhoneNo.errors?.['pattern']) && patPhoneNo.touched"
+                                align="right">
+                                <p style="color: red; font-size: 12px;"><i
+                                        class="fa-solid fa-circle-exclamation"></i>&nbsp;Indian Numbers Only
+                                </p>
+                            </div>
+
+                            <div class="input-group">
+                                <span class="input-group-text"><i class="fa-solid fa-at"></i></span>
+                                <input class="form-control" type="text" placeholder="Enter Email" name="patEmail"
+                                    ngModel required #patEmail="ngModel"
+                                    pattern="[a-zA-Z0-9.]+@[a-zA-Z]+\.[a-zA-Z]{2,}$">
+                            </div>
+                            <div *ngIf="(patEmail.errors?.['required'] || patEmail.errors?.['pattern']) && patEmail.touched"
+                                [class.shake-on-error]="(patEmail.errors?.['required'] || patEmail.errors?.['pattern']) && patEmail.touched"
+                                align="right">
+                                <p style="color: red; font-size: 12px;"><i
+                                        class="fa-solid fa-circle-exclamation"></i>&nbsp;Enter Valid Email</p>
+                            </div>
+
+                            <div class="input-group">
+                                <span class="input-group-text"><i class="fa-solid fa-vials"></i></span>
+                                <select class="form-select" name="labTest" ngModel required #labTest="ngModel">
+                                    <option value="" disabled selected>Choose Lab Test</option>
+                                    <option value="Full Body Checkup">Full Body Checkup</option>
+                                    <option value="Diabetes">Diabetes</option>
+                                    <option value="Thyroid">Thyroid</option>
+                                    <option value="Dengue">Dengue</option>
+                                    <option value="Kidney">Kidney</option>
+                                    <option value="Liver">Liver</option>
+                                    <option value="Women's Health">Women's Health</option>
+                                    <option value="Blood Studies">Blood Studies</option>
+                                </select>
+                            </div>
+                            <div *ngIf="labTest.errors?.['required'] && labTest.touched"
+                                [class.shake-on-error]="labTest.errors?.['required'] && labTest.touched" align="right">
+                                <p style="color: red; font-size: 12px;"><i
+                                        class="fa-solid fa-circle-exclamation"></i>&nbsp;Required
+                                </p>
+                            </div>
+
+                            <div class="input-group">
+                                <span class="input-group-text"><i class="fa-solid fa-calendar-days"></i></span>
+                                <input class="form-control" type="date" name="labDate" ngModel required
+                                    #labDate="ngModel">
+                            </div>
+                            <div *ngIf="labDate.errors?.['required'] && labDate.touched"
+                                [class.shake-on-error]="labDate.errors?.['required'] && labDate.touched" align="right">
+                                <p style="color: red; font-size: 12px;"><i
+                                        class="fa-solid fa-circle-exclamation"></i>&nbsp;Required
+                                </p>
+                            </div>
+
+                            <p style="margin-top: 10px; font-size: small; color: red;" align="center">LabTests start
+                                from 11
+                                AM to 3 PM
+                            </p>
+
+                            <button [disabled]="!labForm.valid" class="btn btn-danger mx-auto d-block">
+                                <span *ngIf="!isSending">Schedule</span>
+                                <span *ngIf="isSending">
+                                    <i class="fa fa-spinner fa-spin"></i> Scheduling...
+                                </span>
+                            </button>
+
+                            <button class="btn btn-outline-primary"
+                                style="float: right; font-size: 10px; padding: 0.25rem;" (click)="toggleBooking()">Book
+                                Myself</button>
+                        </div>
+                    </div>
+                    <!-- End -->
+
+                </div>
+            </div>
+        </div>
+    </form>
+</div>

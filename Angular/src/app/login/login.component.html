@@ -1,0 +1,333 @@
+<div id="background-image">
+    <div class="container d-flex justify-content-center align-items-center vh-100">
+
+        <div class="row mx-auto box"
+            style="max-width: 80%; border: 1px solid rgb(215, 210, 210); border-radius: 10px; backdrop-filter: blur(2px); background-color: rgba(255, 255, 255, 0.3);">
+            <div class="col-md-6 d-none d-md-block">
+                <br>
+                <img src="assets/Images/LoginBG1.png" class="img-fluid" alt="LoginFormBG" style="padding-left: 15px;">
+            </div>
+            <div class="col-md-6 d-flex align-items-center">
+                <div class="d-flex flex-column justify-content-center"
+                    style="width: 430px; padding-left: 10px; padding-right: 10px;">
+                    <h1 style="font-family: 'Varela Round', sans-serif; font-weight: bold; padding-top: 20px;">
+                        Pharma<span style="color: red;">X</span></h1>
+                    <p>India's most trusted Online Pharmacy, Buy your Medicines & Book Appointments @Best Prices!
+                    </p>
+                    <br>
+                    <p>Welcome back!</p>
+                    <div *ngIf="currentStep === 'email'">
+                        <form #emailForm="ngForm" (ngSubmit)="verifyEmail(emailForm.value)" novalidate>
+                            <div *ngIf="!continuePassword" class="input-group">
+                                <span class="input-group-text"><i class="fa-solid fa-at"></i></span>
+                                <input class="form-control rounded-end" type="text" placeholder="Enter Email ID"
+                                    required name="emailId" ngModel>
+                                <button [disabled]="!emailForm.valid" *ngIf="!continuePassword"
+                                    class="btn btn-primary rounded-start" style="margin-left: 10px;">
+                                    <span *ngIf="!isSending">Get OTP</span>
+                                    <span *ngIf="isSending">
+                                        <i class="fa-solid fa-spinner fa-spin"></i> Sending...
+                                    </span>
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+
+                    <!-- For otp Step -->
+                    <div *ngIf="currentStep === 'otp'">
+                        <form #otpForm="ngForm" (ngSubmit)="verifyOtp(otpForm.value)" novalidate>
+                            <div class="input-group">
+                                <span class="input-group-text"><i class="fa-solid fa-key"></i></span>
+                                <input class="form-control rounded-end" type="number" placeholder="Enter OTP" required
+                                    name="otp" ngModel #otp="ngModel">
+                                <button [disabled]="!otpForm.valid" class="btn btn-success rounded-start"
+                                    style="margin-left: 10px;">Submit</button>
+                            </div>
+                        </form>
+                    </div>
+
+
+                    <button *ngIf="!continuePassword" class="btn btn-secondary" style="margin-top: 10px;"
+                        (click)="displayPassword()">or Continue with Password</button>
+
+                    <form #loginForm="ngForm" (ngSubmit)="verifyLogin(loginForm.value)" novalidate>
+                        <div *ngIf="continuePassword">
+
+                            <div class="input-group">
+                                <span class="input-group-text"><i class="fa-solid fa-at"></i></span>
+                                <input class="form-control rounded-end" type="text" placeholder="Enter Email ID"
+                                    required name="emailId" ngModel>
+
+                            </div>
+
+                            <div class="input-group" style="margin-top: 10px;">
+                                <span class="input-group-text"><i class="fa-solid fa-key"></i></span>
+                                <input class="form-control rounded-end" type="password" placeholder="Enter Password"
+                                    required name="password" ngModel #password="ngModel">
+                                <button class="btn btn-success rounded-start"
+                                    style="margin-left: 10px; width: 95px;">Login</button>
+                            </div>
+
+                        </div>
+                    </form>
+
+
+                    <!-- forgot Password-->
+                    <p *ngIf="continuePassword"
+                        style="color: red; font-size: small; margin-top: 2px; margin-bottom: -5px; cursor: pointer;"
+                        data-bs-toggle="modal" data-bs-target="#forgotModal">Forgot Password?
+                    </p>
+
+                    <!-- <div align="center" style="margin-top: 10px;">
+                        <button class="btn d-flex align-items-center justify-content-center"
+                            style="align-self: flex-start; height: 35px; background-color: white; color: black; border: 1px solid rgb(215, 210, 210); font-family: 'PT Sans'; font-weight: bold;">
+                            <img src="assets/Images/GoogleIcon2.png" alt="Google Icon"
+                                style="height: 19px; margin-right: 10px;">
+                            Sign In with Google
+                        </button>
+                    </div> -->
+                    
+                    <div align="center" style="margin-top: 10px; padding-bottom: 20px;">
+                        <p style="font-family: 'Varela Round', sans-serif;">Not feeling well? <span
+                                style="font-family: 'Varela Round', sans-serif; color: red; font-weight: bold; cursor: pointer;"
+                                (click)="signUp()">Sign
+                                Up</span></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+
+
+
+<!-- Forgot Modal -->
+<div class="modal fade" id="forgotModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+    aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="staticBackdropLabel">Reset Password</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+
+
+            <!-- Modal Body -->
+            <div class="modal-body" align="center">
+
+
+                <!-- For EmailOTP Option-->
+                <button *ngIf="!emailOption" class="btn btn-info" (click)="displayEmailOption()">Email OTP</button>
+                <div *ngIf="emailOption">
+                    <div *ngIf="forgotStep === 'emailStep'">
+                        <form #emailForm="ngForm" (ngSubmit)="validateEmail(emailForm.value)" novalidate>
+                            <div style="width: 300px;">
+                                <div class="input-group">
+                                    <span class="input-group-text"><i class="fa-solid fa-envelope"></i></span>
+                                    <input class="form-control" type="email" placeholder="Enter Email ID" name="emailId"
+                                        ngModel #emailId="ngModel" required
+                                        pattern="[a-zA-Z0-9.]+@[a-zA-Z]+\.[a-zA-Z]{2,}$">
+                                </div>
+                                <div *ngIf="((emailId.errors?.['required'] || emailId.errors?.['pattern']) && emailId.touched)"
+                                    [class.shake-on-error]="(((emailId.errors?.['required']) || (emailId.errors?.['pattern'])) && emailId.touched)"
+                                    align="right">
+                                    <p style="color: red; font-size: 12px;"><i
+                                            class="fa-solid fa-circle-exclamation"></i>&nbsp;Required
+                                    </p>
+                                </div>
+
+                                <button [disabled]="!emailForm.valid" class="btn btn-primary"
+                                    style="margin-top: 5px; margin-bottom: 5px;"><span *ngIf="!isSending">Get OTP</span>
+                                    <span *ngIf="isSending">
+                                        <i class="fa fa-spinner fa-spin"></i> Sending...
+                                    </span>
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+
+                    <div *ngIf="forgotStep === 'otpStep'">
+                        <form #otpForm="ngForm" (ngSubmit)="validateOtp(otpForm.value)" novalidate>
+                            <div style="width: 300px;">
+                                <div class="input-group">
+                                    <span class="input-group-text"><i class="fa-solid fa-key"></i></span>
+                                    <input class="form-control" type="number" placeholder="Enter OTP" name="otp" ngModel
+                                        #otp="ngModel" required>
+                                </div>
+                                <div *ngIf="(otp.errors?.['required'] && otp.touched)"
+                                    [class.shake-on-error]="(otp.errors?.['required'] && otp.touched)" align="right">
+                                    <p style="color: red; font-size: 12px;"><i
+                                            class="fa-solid fa-circle-exclamation"></i>&nbsp;Required
+                                    </p>
+                                </div>
+
+                                <button [disabled]="!otpForm.valid" class="btn btn-primary"
+                                    style="margin-top: 5px; margin-bottom: 5px;">Verify
+                                    OTP</button>
+                            </div>
+                        </form>
+                    </div>
+
+
+                    <div *ngIf="forgotStep === 'setPasswordStep'">
+                        <form #setPasswordForm="ngForm" (ngSubmit)="setPassword(setPasswordForm.value)" novalidate>
+                            <div style="width: 300px;">
+                                <div class="input-group">
+                                    <span class="input-group-text"><i class="fa-solid fa-key"></i></span>
+                                    <input class="form-control" type="password" placeholder="Set Password"
+                                        name="password" ngModel #password="ngModel" required
+                                        pattern="^(?=.*[A-Z])(?=.*\d)(?=.*[~!@#$%^&*]).{3,8}$">
+                                </div>
+                                <div *ngIf="((password.errors?.['required'] || password.errors?.['pattern']) && password.touched)"
+                                    [class.shake-on-error]="((password.errors?.['required'] || password.errors?.['pattern']) && password.touched)"
+                                    align="right">
+                                    <p style="color: red; font-size: 12px; display: inline-block; text-align: left;"><i
+                                            class="fa-solid fa-circle-exclamation"></i>&nbsp;Password
+                                        must
+                                        contain less than 8 characters<br>
+                                        • one upper case letter <br>
+                                        • one digit <br>
+                                        • one symbol (~!@#$%^&*)
+                                    </p>
+                                </div>
+
+                                <div class="input-group" style="margin-top: 5px;">
+                                    <span class="input-group-text"><i class="fa-solid fa-key"></i></span>
+                                    <input class="form-control" type="password" placeholder="Re-enter Password"
+                                        name="rpassword" ngModel #rpassword="ngModel" required>
+                                </div>
+                                <div *ngIf="((rpassword.errors?.['required'] || !validateRepeat(password.value, rpassword.value)) && rpassword.touched)"
+                                    align="right"
+                                    [class.shake-on-error]="((rpassword.errors?.['required'] || !validateRepeat(password.value, rpassword.value)) && rpassword.touched)">
+                                    <p style="color: red; font-size: 12px; display: inline-block; text-align: left;"><i
+                                            class="fa-solid fa-circle-exclamation"></i>&nbsp;Re-enter Password
+                                    </p>
+                                </div>
+
+                                <button [disabled]="!setPasswordForm.valid" class="btn btn-primary"
+                                    style="margin-top: 5px; margin-bottom: 5px;">Set Password</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+
+                <!-- end Of EmailOTP Forgot Body-->
+
+                <!-- For PhoneOTP Option-->
+
+
+                <button *ngIf="!phoneOption" class="btn btn-info" (click)="displayPhoneOption()"
+                    style="margin-left: 10px;">Phone OTP</button>
+                <div *ngIf="phoneOption">
+                    <div *ngIf="phoneForgotStep === 'phoneNumberStep'">
+                        <form #phoneForm="ngForm" (ngSubmit)="verifyPhoneNumber(phoneForm.value)" novalidate>
+                            <div style="width: 300px;">
+                                <div class="input-group" style="margin-top: 5px;">
+                                    <span class="input-group-text rounded-start"><i
+                                            class="fa-solid fa-phone"></i></span>
+                                    <input class="form-control" type="number" placeholder="PhoneNo" required
+                                        name="phone" ngModel #phoneNo="ngModel" pattern="[6-9][0-9]{9}">
+                                    <input type="hidden" [(ngModel)]="fullphoneNo" name="phoneNo">
+                                </div>
+                                <div *ngIf="(phoneNo.errors?.['required'] || phoneNo.errors?.['pattern']) && phoneNo.touched"
+                                    [class.shake-on-error]="(phoneNo.errors?.['required'] || phoneNo.errors?.['pattern']) && phoneNo.touched"
+                                    align="right">
+                                    <p style="color: red; font-size: 12px;"><i
+                                            class="fa-solid fa-circle-exclamation"></i>&nbsp;Indian Numbers Only
+                                    </p>
+                                </div>
+
+                                <button [disabled]="!phoneForm.valid" class="btn btn-primary"
+                                    style="margin-top: 5px;"><span *ngIf="!isSending">Get OTP</span>
+                                    <span *ngIf="isSending">
+                                        <i class="fa fa-spinner fa-spin"></i> Sending...
+                                    </span>
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+
+                    <div *ngIf="phoneForgotStep === 'phoneOtpStep'">
+                        <form #phoneOtpForm="ngForm" (ngSubmit)="verifyPhoneOtp(phoneOtpForm.value)" novalidate>
+                            <div style="width: 300px;">
+                                <div class="input-group" style="margin-top: 5px;">
+                                    <span class="input-group-text"><i class="fa-solid fa-key"></i></span>
+                                    <input class="form-control" type="number" placeholder="Enter OTP" name="otp" ngModel
+                                        #otp="ngModel" required>
+                                </div>
+                                <div *ngIf="(otp.errors?.['required'] && otp.touched)"
+                                    [class.shake-on-error]="(otp.errors?.['required'] && otp.touched)" align="right">
+                                    <p style="color: red; font-size: 12px;"><i
+                                            class="fa-solid fa-circle-exclamation"></i>&nbsp;Required
+                                    </p>
+                                </div>
+
+                                <button [disabled]="!phoneOtpForm.valid" class="btn btn-primary"
+                                    style="margin-top: 5px;">Verify
+                                    OTP</button>
+                            </div>
+                        </form>
+                    </div>
+
+
+                    <div *ngIf="phoneForgotStep === 'setPasswordPhoneStep'">
+                        <form #setPasswordByPhoneForm="ngForm"
+                            (ngSubmit)="setPasswordByPhone(setPasswordByPhoneForm.value)" novalidate>
+                            <div style="width: 300px;">
+                                <div class="input-group" style="margin-top: 5px;">
+                                    <span class="input-group-text"><i class="fa-solid fa-key"></i></span>
+                                    <input class="form-control" type="password" placeholder="Set Password"
+                                        name="password" ngModel #password="ngModel" required
+                                        pattern="^(?=.*[A-Z])(?=.*\d)(?=.*[~!@#$%^&*]).{3,8}$">
+                                </div>
+                                <div *ngIf="((password.errors?.['required'] || password.errors?.['pattern']) && password.touched)"
+                                    [class.shake-on-error]="((password.errors?.['required'] || password.errors?.['pattern']) && password.touched)"
+                                    align="right">
+                                    <p style="color: red; font-size: 12px; display: inline-block; text-align: left;">
+                                        <i class="fa-solid fa-circle-exclamation"></i>&nbsp;Password
+                                        must
+                                        contain less than 8 characters<br>
+                                        • one upper case letter <br>
+                                        • one digit <br>
+                                        • one symbol (~!@#$%^&*)
+                                    </p>
+                                </div>
+
+                                <div class="input-group" style="margin-top: 5px;">
+                                    <span class="input-group-text"><i class="fa-solid fa-key"></i></span>
+                                    <input class="form-control" type="password" placeholder="Re-enter Password"
+                                        name="rpassword" ngModel #rpassword="ngModel" required>
+                                </div>
+                                <div *ngIf="((rpassword.errors?.['required'] || !validateRepeat(password.value, rpassword.value)) && rpassword.touched)"
+                                    align="right"
+                                    [class.shake-on-error]="((rpassword.errors?.['required'] || !validateRepeat(password.value, rpassword.value)) && rpassword.touched)">
+                                    <p style="color: red; font-size: 12px; display: inline-block; text-align: left;">
+                                        <i class="fa-solid fa-circle-exclamation"></i>&nbsp;Re-enter Password
+                                    </p>
+                                </div>
+
+                                <button [disabled]="!setPasswordByPhoneForm.valid" class="btn btn-primary"
+                                    style="margin-top: 5px;">Set Password</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+                <!-- end Of PhoneOTP Forgot Body-->
+
+
+            </div>
+
+
+
+            <!-- Modal Footer -->
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
